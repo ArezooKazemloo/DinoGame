@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         AddButton(pauseCard, "RESTART", RestartGame, new Vector2(0, -25));
         AddButton(pauseCard, "MAIN MENU", ReturnToMainMenu, new Vector2(0, -100));
         AddButton(pauseCard, "EXIT", ExitGame, new Vector2(0, -175));
-        gameOverMenu = CreateMenu("GameOverMenu", "RUN ENDED", "You made it further than last time.", "RUN AGAIN", RestartGame);
+        gameOverMenu = CreateMenu("GameOverMenu", "RUN ENDED", string.Empty, "RUN AGAIN", RestartGame);
         Transform gameOverCard = gameOverMenu.transform.Find("Card");
         gameOverScoreText = CreateText(gameOverCard, "FinalScore", "SCORE  000000", 24, new Vector2(0, -15));
         AddButton(gameOverCard, "MAIN MENU", ReturnToMainMenu, new Vector2(0, -100));
@@ -427,7 +427,8 @@ public class GameManager : MonoBehaviour
         cardOutline.effectDistance = new Vector2(2f, -2f);
 
         CreateText(card.transform, "Title", title, 48, new Vector2(0, isMainMenu ? 295 : 190));
-        CreateText(card.transform, "Subtitle", subtitle, 19, new Vector2(0, isMainMenu ? 245 : 132));
+        if (!string.IsNullOrWhiteSpace(subtitle))
+            CreateText(card.transform, "Subtitle", subtitle, 19, new Vector2(0, isMainMenu ? 245 : 132));
         AddButton(card.transform, primaryButton, action, new Vector2(0, isMainMenu ? -100 : 55));
         if (isMainMenu)
         {
